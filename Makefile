@@ -6,7 +6,7 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/07 18:56:34 by npentini          #+#    #+#              #
-#    Updated: 2024/07/14 23:08:21 by npentini         ###   ########.fr        #
+#    Updated: 2024/07/14 23:23:49 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(COMP) $(CFLAGS) $(INCS) -o $@ -c $< -g
+	@$(COMP) $(CFLAGS) -o $@ -c $< -g
 
 $(LIBFT_TIMESTAMP): $(LIBFT_PATH)
 	@make -C $(LIBFT_PATH) -s > /dev/null 2>&1
@@ -42,7 +42,7 @@ clean:
 	@make -C $(LIBFT_PATH) clean -s > /dev/null 2>&1
 	@echo "Objects has been deleted"
 	
-fclean:
+fclean: clean
 	@$(DELETE) $(NAME)
 	@make -C $(LIBFT_PATH) fclean -s > /dev/null 2>&1
 	@$(DELETE) $(LIBFT_TIMESTAMP)
