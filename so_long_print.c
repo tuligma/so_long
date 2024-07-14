@@ -6,11 +6,34 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 03:14:55 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/13 19:02:23 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:16:44 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+
+void	print_struct(t_sl_err *error)
+{
+	int	x;
+
+	x = 1;
+	ft_printf("member%d:\n%s\n\n", x++, error->map_str);
+	ft_printf("member%d:\n", x++);
+	while (*error->map != NULL)
+		ft_printf("%s\n", *error->map++);
+	ft_printf("member%d:\n", x++);
+	while (*error->map_path != NULL)
+		ft_printf("%s\n", *error->map_path++);
+	ft_printf("member%d:%d\n\n", x++, error->line_count);
+	ft_printf("member%d:%d\n", x++, error->line_len);
+	ft_printf("member%d:%d\n", x++, error->close_wall);
+	ft_printf("member%d:%d\n", x++, error->path);
+	ft_printf("member%d:%d\n", x++, error->wall);
+	ft_printf("member%d:%d\n", x++, error->collectible);
+	ft_printf("member%d:%d\n", x++, error->exit);
+	ft_printf("member%d:%d\n", x++, error->player);
+	ft_printf("member%d:%d\n", x++, error->valid_path);
+}
 
 int	error_printer(int error_code, t_sl_hub *data, char **map, char *map_str)
 {	
