@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:26:50 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/14 23:18:49 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:25:13 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,29 @@
 
 int	error_argument(int argc, char *argv[])
 {
+	char	*str;
+	int		x;
+	int		len;
+	int		fd;
+
+	x = -1;
+	str = argv[1];
 	if (argc != 2)
-		return (error_printer(E2BIG, NULL, NULL, NULL));
-	if (argv[1] == NULL)
-		return (error_printer(EINVAL, NULL, NULL, NULL));
+		return (error_print_free(EARGC, EMSG_EARGC));
+	if (str != NULL)
+	{
+		len = ft_strlen(str);
+		x = len - 4;
+		if (ft_strncmp(str + x, ".ber", 4) != 0)
+			return (error_print_free(EARGF, EMSG_EARGF));
+		fd = open(str, O_RDONLY);
+		if (fd == -1)
+		{
+			close(fd);
+			return (error_print_free(EARGX, EMSG_EARGX));
+		}
+		close(fd);
+	}
 	return (0);
 }
 
@@ -29,13 +48,13 @@ int	find_path(t_sl_hub *data, int x, int y)
 	if (x < 1 || x >= data->error->line_count - 1
 		|| y < 1 || y >= data->error->line_len - 1)
 		return (0);
-	if (data->error->map_path[x][y] == '1'
-		|| data->error->map_path[x][y] == 'V')
+	if (data->error->map[x][y] == '1'
+		|| data->error->map[x][y] == 'V')
 		return (0);
-	if (data->error->map_path[x][y] == 'E')
+	if (data->error->map[x][y] == 'E')
 		return (1);
-	if (data->error->map_path[x][y] == '0')
-		data->error->map_path[x][y] = 'V';
+	if (data->error->map[x][y] == '0')
+		data->error->map[x][y] = 'V';
 	temp_x = x;
 	temp_y = y;
 	if (find_path(data, temp_x + 1, temp_y) == 1)
@@ -46,7 +65,7 @@ int	find_path(t_sl_hub *data, int x, int y)
 		return (1);
 	if (find_path(data, temp_x, temp_y - 1) == 1)
 		return (1);
-	data->error->map_path[x][y] = '0';
+	data->error->map[x][y] = '0';
 	return (0);
 }
 
@@ -94,22 +113,13 @@ void	find_epc_location(t_sl_hub *data)
 
 int	is_map_valid_path(t_sl_hub *data)
 {
-	char	**map_path;
-
-	map_path = ft_split(data->error->map_str, '\n');
-	if (map_path == NULL)
-		return (error_printer(ENOMEM, data,
-				data->error->map, data->error->map_str));
-	data->error->map_path = map_path;
 	find_epc_location(data);
 	data->error->current_x = data->error->player_x;
 	data->error->current_y = data->error->player_y;
 	data->error->valid_path = find_path(data,
 			data->error->current_x, data->error->current_y);
 	if (data->error->valid_path == 0)
-		return (error_printer(1001, data,
-				data->error->map, data->error->map_str));
+		return (error_print_free(EMPNP, EMSG_EMPNP));
 	ft_printf("%d\n", data->error->valid_path);
-	free_malloc(NULL, data->error->map_path, NULL, -1);
 	return (0);
 }

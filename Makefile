@@ -6,12 +6,12 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/07 18:56:34 by npentini          #+#    #+#              #
-#    Updated: 2024/07/14 23:23:49 by npentini         ###   ########.fr        #
+#    Updated: 2024/07/15 13:34:36 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-SRCS = so_long.c so_long_misc.c so_long_print.c so_long_error.c so_long_error_func1.c so_long_error_func2.c
+SRCS = so_long.c so_long_misc.c so_long_print.c so_long_error.c so_long_error_func1.c so_long_error_func2.c so_long_free.c
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_TIMESTAMP = $(LIBFT_PATH)/.libf_timestamp

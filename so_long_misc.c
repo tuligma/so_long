@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 02:19:41 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/14 23:19:11 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/15 05:14:16 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	struct_init(void **struct_ptr, size_t struct_size)
 {
 	*struct_ptr = ft_calloc(1, struct_size);
 	if (*struct_ptr == NULL)
-		return (ENOMEM);
+		return (error_print_free(EMALL, EMSG_EMALL));
 	return (0);
 }
 

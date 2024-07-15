@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_errror.h                                   :+:      :+:    :+:   */
+/*   so_long_error.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:47:04 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/14 23:17:06 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:34:20 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct s_sl_err
 {
 	char *map_str;
 	char **map;
-	char **map_path;
 	int	line_count;
 	int	line_len;
 	int	close_wall;
@@ -54,6 +53,7 @@ typedef struct s_sl_vmap
 
 # include "mycolors.h"
 
+int	error_print_free(int error_code, char *error_message);
 int	error_printer(int error_code, t_sl_hub *data, char **map, char *map_str);
 // print array func 
 void	print_struct(t_sl_err *error);
@@ -62,10 +62,10 @@ void	print_map_array_colored(char **map, int line_count, int line_len);
 
 
 int		map_error_checker(t_sl_hub *data);
-char	*line_extraction(int fd, t_sl_err *error,
+char	*line_extraction(int fd, t_sl_hub *data,
 			char *map_str, char *(*f)(int));
 void	error_func_init(int (**error_function)(t_sl_hub*));
-int		map_extraction(t_sl_err *error, char *file);
+int		map_extraction(t_sl_hub *data, char *file);
 int		error_handler(int argc, char *argv[]);
 
 // error function pointers

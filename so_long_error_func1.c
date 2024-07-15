@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_error_func.c                               :+:      :+:    :+:   */
+/*   so_long_error_func1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:04:47 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/14 22:25:30 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:22:56 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	is_map_empty(t_sl_hub *data)
 
 	map = data->error->map;
 	if (map == NULL)
-		return (error_printer(1001, data, map, data->error->map_str));
+		return (error_print_free(EMPEY, EMSG_EMPEY));
 	x = -1;
 	if (data->error->line_count == 0 || data->error->line_len == 0)
-		return (error_printer(1001, data, map, data->error->map_str));
+		return (error_print_free(EMPEY, EMSG_EMPEY));
 	while (++x < data->error->line_count)
 	{
 		if (map[x] == NULL)
-			return (error_printer(1001, data, map, data->error->map_str));
+			return (error_print_free(EMPEY, EMSG_EMPEY));
 	}
 	return (0);
 }
@@ -43,7 +43,7 @@ int	is_map_rectangular(t_sl_hub *data)
 	{
 		len = ft_strlen(map[x]);
 		if (len != data->error->line_len)
-			return (error_printer(1001, data, map, data->error->map_str));
+			return (error_print_free(EMPRT, EMSG_EMPRT));
 	}
 	return (0);
 }
@@ -66,11 +66,11 @@ int	is_map_walls(t_sl_hub *data)
 			while (y < data->error->line_len && map[x][y] == '1')
 				y++;
 			if (y != data->error->line_len)
-				return (error_printer(1001, data, map, data->error->map_str));
+				return (error_print_free(EMPWL, EMSG_EMPWL));
 		}
 		else
 			if (map[x][y] != '1' && map[x][data->error->line_len - 1] != '1')
-				return (error_printer(1001, data, map, data->error->map_str));
+				return (error_print_free(EMPWL, EMSG_EMPWL));
 	}
 	return (0);
 }
@@ -83,7 +83,7 @@ int	find_epc(t_sl_hub *data, char **map, int x, int len)
 	while (++y < len - 1)
 	{
 		if (ft_strchr("10EPC", map[x][y]) == NULL)
-			return (1001);
+			return (EMPOE);
 		if (map[x][y] == 'E')
 			data->error->exit++;
 		else if (map[x][y] == 'P')
@@ -108,15 +108,15 @@ int	is_map_one_epc(t_sl_hub *data)
 	{
 		if (x == 0 || x == line_count - 1)
 			continue ;
-		else
-		{
-			y = find_epc(data, map, x, data->error->line_len);
-			if (y != 0)
-				return (error_printer(1001, data, map, data->error->map_str));
-		}
+		y = find_epc(data, map, x, data->error->line_len);
+		if (y != 0)
+			return (error_print_free(EMPOE, EMSG_EMPOE));
 	}
-	if (data->error->exit != 1 || data->error->player != 1
-		|| data->error->collectible == 0)
-		return (error_printer(1001, data, map, data->error->map_str));
+	if (data->error->exit != 1)
+		return (error_print_free(EMPME, EMSG_EMPME));
+	if (data->error->player != 1)
+		return (error_print_free(EMPMP, EMSG_EMPMP));
+	if (data->error->exit == 0)
+		return (error_print_free(EMPNC, EMSG_EMPNC));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 03:14:55 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/14 23:16:44 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:28:49 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	print_struct(t_sl_err *error)
 	ft_printf("member%d:\n", x++);
 	while (*error->map != NULL)
 		ft_printf("%s\n", *error->map++);
-	ft_printf("member%d:\n", x++);
-	while (*error->map_path != NULL)
-		ft_printf("%s\n", *error->map_path++);
 	ft_printf("member%d:%d\n\n", x++, error->line_count);
 	ft_printf("member%d:%d\n", x++, error->line_len);
 	ft_printf("member%d:%d\n", x++, error->close_wall);
@@ -35,28 +32,6 @@ void	print_struct(t_sl_err *error)
 	ft_printf("member%d:%d\n", x++, error->valid_path);
 }
 
-int	error_printer(int error_code, t_sl_hub *data, char **map, char *map_str)
-{	
-	if (error_code != 0)
-	{
-		ft_putstr_fd("Error\n", STDERR_FILENO);
-		if (error_code == E2BIG)
-			ft_putstr_fd("Please provide the only one map file!", STDERR_FILENO);
-		else if (error_code == EINVAL)
-			ft_putstr_fd("Please provide a valid map!", STDERR_FILENO);
-		else if (error_code == ENOMEM)
-			ft_putstr_fd("No Memory available!\n", STDERR_FILENO);
-		else if (error_code == ENOENT)
-			ft_putstr_fd("Can't open the map!\n", STDERR_FILENO);
-		else if (error_code == 1001)
-			ft_putstr_fd("Invalid map data!\n", STDERR_FILENO);
-		else
-			ft_putstr_fd("Unknown error occured!\n", STDERR_FILENO);
-		free_malloc(data, map, map_str, -1);
-	}
-	return (1);
-}
-
 void	print_map_array(char **map_array)
 {
 	int	x;
@@ -66,35 +41,18 @@ void	print_map_array(char **map_array)
 		ft_printf("%s\n", map_array[x]);
 }
 
-void	print_map_array_colored(char **map, int line_count, int line_len)
+int	error_print_free(int error_code, char *error_message)
 {
-	int x;
-	int y;
-	
-	ft_printf("%s", BUHB);
-	x = -1;
-	while (map[++x] != NULL)
+	if (error_code != 0)
 	{
-		if (x == 0 || x == line_count - 1)
-			ft_printf("%s%s%s\n", BL, map[x], CR);
-		else
-		{
-			y = -1;
-			while (map[x][++y] != '\0')
-			{
-				if (map[x][y] == '1' || y == 0 || y == line_len - 1)
-					ft_printf("%s%c%s", BL, map[x][y], CR);
-				else if (map[x][y] == '0')
-					ft_printf("%s%c%s", WH, map[x][y], CR);
-				else if (map[x][y] == 'P')
-					ft_printf("%s%c%s", BHBL, map[x][y], CR);
-				else if (map[x][y] == 'E')
-					ft_printf("%s%c%s", BHRE, map[x][y], CR);
-				else if (map[x][y] == 'C')
-					ft_printf("%s%c%s", BHYE, map[x][y], CR);
-			}
-			ft_printf("\n");
-		}
+		ft_putstr_fd(EMSG, STDERR_FILENO);
+		if (error_code == EMPEY || error_code == EMPRT
+			|| error_code == EMPWL || error_code == EMPOE
+			|| error_code == EMPME || error_code == EMPMP
+			|| error_code == EMPEY || error_code == EMPNC
+			|| error_code == EMPNP)
+			ft_putstr_fd(EMSG_IMP, STDERR_FILENO);
+		ft_putstr_fd(error_message, STDERR_FILENO);
 	}
-	ft_printf("%s\n", CR);
+	return (1);
 }
