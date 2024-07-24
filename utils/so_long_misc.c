@@ -6,11 +6,11 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 02:19:41 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/15 05:14:16 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/15 22:20:53 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
 int	struct_init(void **struct_ptr, size_t struct_size)
 {

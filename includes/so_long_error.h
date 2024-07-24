@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:47:04 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/15 13:34:20 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/20 21:42:48 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ char	*line_extraction(int fd, t_sl_hub *data,
 			char *map_str, char *(*f)(int));
 void	error_func_init(int (**error_function)(t_sl_hub*));
 int		map_extraction(t_sl_hub *data, char *file);
-int		error_handler(int argc, char *argv[]);
+t_sl_hub	*init_handler(int argc, char *argv[]);
 
 // error function pointers
 int		error_argument(int argc, char *argv[]);
 int		is_map_empty(t_sl_hub *data);
 int		is_map_rectangular(t_sl_hub *data);
 int		is_map_walls(t_sl_hub *data);
-int		find_epc(t_sl_hub *data, char **map, int x, int len);
+int		find_epc(t_sl_hub *data, char **map, int y, int len);
 int		is_map_one_epc(t_sl_hub *data);
-void	find_epc_location_ext(t_sl_hub *data, char **map, int x);
+void	find_epc_location_ext(t_sl_hub *data, char **map, int y);
 void	find_epc_location(t_sl_hub *data);
-int		find_path(t_sl_hub *data, int x, int y);
+int		find_path(t_sl_hub *data, int y, int x);
 int		is_map_valid_path(t_sl_hub *data);
 
 #define ERR_FUNC_COUNT 5

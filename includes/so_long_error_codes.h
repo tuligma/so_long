@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 01:34:40 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/15 02:03:21 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/25 00:56:59 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,35 @@
 # define EMPNC 2009 // if the map is not valid :: map has no Collectible/s
 # define EMPNP 2010 // if the map is not valid :: map has no valid path
 
+# define EXINI 3000 // if the mlx_init fails.
+# define EXWIN 3001 // if the mlx_new_window fails.
+# define EXFTI 3002 // if the mlx_xmp_file_to_images fails.
+# define EXFNP 3003	// if the xpm file is not proportion.
+# define EXIGA 3004 // if the mlx_get_data_addr fails;
 // ERROR MESSAGE
 
 # define EMSG "ERROR\n"
 # define EMSG_EARGC "Invalid number of arguments!\n"
 # define EMSG_EARGF "The map file is not a \".ber\" file!\n"
-# define EMSG_EARGX "The map file doesnt exit!\n"
+# define EMSG_EARGX "The map file doesn't exist!\n"
 
 # define EMSG_EMALL "Memory allocation failed!\n"
 # define EMSG_EFILO "File cannot be opened!\n"
 
 # define EMSG_IMP "Invalid Map: "
-# define EMSG_EMPEY "Map is EMPTY!!!\n"
-# define EMSG_EMPRT "Map is NOT RECTANGULAR!!!\n"
-# define EMSG_EMPWL "Map wall is NOT FORTIFIED!!!\n"
-# define EMSG_EMPOE "Map has OTHER ELEMENT!!!\n"
-# define EMSG_EMPME "Map has MULTIPLE EXIT!!!\n"
-# define EMSG_EMPMP "Map has MULTIPLE PLAYER!!!\n"
-# define EMSG_EMPNC "Map has NO COLLECTIBLE/S!!!\n"
-# define EMSG_EMPNP "Map has NO VALID PATH!!!\n"
+# define EMSG_EMPEY "EMPTY!!!\n"
+# define EMSG_EMPRT "NOT RECTANGULAR!!!\n"
+# define EMSG_EMPWL "Wall IS NOT FORTIFIED!!!\n"
+# define EMSG_EMPOE "HAS AN OTHER ELEMENT!!!\n"
+# define EMSG_EMPME "HAS A MULTIPLE EXIT!!!\n"
+# define EMSG_EMPMP "HAS A MULTIPLE PLAYER!!!\n"
+# define EMSG_EMPNC "HAS NO COLLECTIBLE/S!!!\n"
+# define EMSG_EMPNP "HAS NO VALID PATH!!!\n"
 
+# define EMSG_EXINI "mlx_init() function failed!!!"
+# define EMSG_EXWIN "mlx_new_window() function failed!!!"
+# define EMSG_EXFTI "mlx_xpm_file_to_image() function failed!!!"
+# define EMSG_EXFNP "the image's width and height are not proportion!!!"
+# define EMSG_EXIGA "mlx_get_data_addr() function failed!!!"
 
 #endif

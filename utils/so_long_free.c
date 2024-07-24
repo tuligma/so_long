@@ -6,11 +6,11 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:05:36 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/15 14:27:14 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/25 01:52:59 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
 void	free_str(char **str)
 {
@@ -22,15 +22,15 @@ void	free_str(char **str)
 	}
 }
 
-void	free_array(char ***array, int len, int x)
+void	free_array(char ***array, int y_len, int y)
 {
 	if (array != NULL && *array != NULL)
 	{
-		while (++x < len)
+		while (++y < y_len)
 		{
-			if ((*array)[x] != NULL)
-				free((*array)[x]);
-			(*array)[x] = NULL;
+			if ((*array)[y] != NULL)
+				free((*array)[y]);
+			(*array)[y] = NULL;
 		}
 		free(*array);
 		*array = NULL;
@@ -44,6 +44,21 @@ void	free_struct(void **data)
 		free(*data);
 		*data = NULL;
 	}
+}
+
+void	destroy_img(void **data, void *mlx, int x, int len)
+{
+	if (data != NULL && *data != NULL)
+	{
+		while (++x < len)
+		{
+			if (data[x] == NULL)
+				continue ;
+			mlx_destroy_image(mlx, data[x]);
+			data[x] = NULL;
+		}
+	}
+	
 }
 
 int	free_data(t_sl_hub **data, int which_to_free, int x)
@@ -64,9 +79,23 @@ int	free_data(t_sl_hub **data, int which_to_free, int x)
 			free_data(data, 12, x);
 			free_struct((void **)&(*data)->error);
 		}
+		else if (which_to_free == 2 && *data != NULL && (*data)->mlx != NULL)
+		{
+			destroy_img(&(*data)->tiles->img_g, (*data)->mlx->mlx, -1, PATH_COUNT);
+			mlx_destroy_window((*data)->mlx->mlx, (*data)->mlx->win);
+			mlx_destroy_display((*data)->mlx->mlx);
+			free_str((char **)&(*data)->mlx->mlx);
+			free_struct((void **)&(*data)->tiles);
+			free_struct((void **)&(*data)->mlx);
+		}
 		else if (which_to_free == 0)
 		{
+			free_data(data, 2, x);
 			free_data(data, 1, x);
+			if ((*data)->map_str != NULL)
+				free_str(&(*data)->map_str);
+			if ((*data)->map != NULL)
+				free_array(&(*data)->map, (*data)->map_y, -1);
 			free(*data);
 			*data = NULL;
 			data = NULL;
