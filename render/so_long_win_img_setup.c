@@ -6,29 +6,25 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 00:38:04 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/25 01:55:26 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/26 03:17:11 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
 void	path_init_ext(char **path_array)
 {
-	path_array[16] = PATH_P_BS;
-	path_array[17] = PATH_P_BR;
-	path_array[18] = PATH_P_BL;
-	path_array[19] = PATH_PS_FS;
+	path_array[16] = PATH_PE_BS;
+	path_array[17] = PATH_P_BS;
+	path_array[18] = PATH_PS_FS;
+	path_array[19] = PATH_PE_FS;
 	path_array[20] = PATH_P_FS;
-	path_array[21] = PATH_P_FR;
-	path_array[22] = PATH_P_FL;
-	path_array[23] = PATH_PS_LS;
-	path_array[24] = PATH_P_LS;
-	path_array[25] = PATH_P_LR;
-	path_array[26] = PATH_P_LL;
-	path_array[27] = PATH_PS_RS;
-	path_array[28] = PATH_P_RS;
-	path_array[29] = PATH_P_RR;
-	path_array[30] = PATH_P_RL;
+	path_array[21] = PATH_PS_LS;
+	path_array[22] = PATH_PE_LS;
+	path_array[23] = PATH_P_LS;
+	path_array[24] = PATH_PS_RS;
+	path_array[25] = PATH_PE_RS;
+	path_array[26] = PATH_P_RS;
 }
 
 void	path_init(char **path_array)
@@ -85,7 +81,10 @@ int	setup_image(t_sl_hub *data)
 	path_init(path_array);
 	result = image_init(data, path_array);
 	if (result != 0)
+	{
+		free(path_array);
 		return (error_print_free(EXFTI, EMSG_EXFTI));
+	}
 	free(path_array);
 	return (0);
 }

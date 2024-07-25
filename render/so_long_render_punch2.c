@@ -6,11 +6,11 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 23:11:59 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/24 23:40:06 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/26 03:18:12 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
 void	wall_up_punch(t_sl_hub *data, int y, int x)
 {
@@ -48,6 +48,12 @@ void	wall_dn_punch(t_sl_hub *data, int y, int x)
 		mlx_put_image_to_window(data->mlx->mlx, data->mlx->win, img,
 			x * data->xpm_w, y * data->xpm_h);
 	}
+	mlx_string_put(data->mlx->mlx, data->mlx->win,
+		(data->xpm_w / 2) - 7,
+		((data->map_y - 1) * data->xpm_h) + 16, 0xBFD9C6, "move:");
+	mlx_string_put(data->mlx->mlx, data->mlx->win,
+		data->xpm_w / 2,
+		((data->map_y - 1) * data->xpm_h) + 32, 0xFF5D73, "0");
 }
 
 void	wall_lr_punch(t_sl_hub *data, int y, int x)

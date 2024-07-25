@@ -6,11 +6,11 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 22:55:04 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/25 01:56:36 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/26 03:18:24 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
 void	elem_punch(t_sl_hub *data, int y, int x)
 {
@@ -56,9 +56,15 @@ void	player_punch(t_sl_hub *data, int y, int x)
 	void	*img;
 
 	if (data->p_y <= data->map_y / 2)
+	{
 		img = data->tiles->img_ps_fs;
+		data->mlx->prev_pov = DN;
+	}
 	else
+	{
 		img = data->tiles->img_ps_bs;
+		data->mlx->prev_pov = UP;
+	}
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win, img,
 		x * data->xpm_w, y * data->xpm_h);
 }

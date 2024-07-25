@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:26:50 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/25 00:28:09 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:50:34 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int	is_map_valid_path(t_sl_hub *data)
 	data->e_y = data->error->exit_y;
 	data->p_x = data->error->player_x;
 	data->p_y = data->error->player_y;
+	data->collect = data->error->collectible;
 	return (0);
 }

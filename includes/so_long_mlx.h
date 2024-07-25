@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 02:18:17 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/25 01:07:09 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/25 23:29:31 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,9 @@ typedef struct s_sl_mlx
 	void	*img_sample;
 	int		height;
 	int		width;
+	int		prev_pov;
+	int		next_pov;
 }	t_sl_mlx;
-
-typedef struct s_sl_img
-{
-	void	*tl_img;
-	char	*tl_addr;
-	int		tl_bpp;
-	int		tl_len;
-	int		tl_endian;
-}	t_sl_img;
-
-typedef struct s_sl_imgt
-{
-	void	*lr_img;
-	char	*lr_addr;
-	int		lr_bpp;
-	int		lr_len;
-	int		lr_endian;
-	int		lr_y;
-	int		lr_x;
-}	t_sl_imgt;
-
 
 typedef struct s_sl_tiles
 {
@@ -61,31 +42,18 @@ typedef struct s_sl_tiles
 	void *img_xc;
 	void *img_xo;
 	void *img_ps_bs;
+	void *img_pe_bs;
 	void *img_p_bs;
-	void *img_p_br;
-	void *img_p_bl;
 	void *img_ps_fs;
+	void *img_pe_fs;
 	void *img_p_fs;
-	void *img_p_fr;
-	void *img_p_fl;
 	void *img_ps_ls;
+	void *img_pe_ls;
 	void *img_p_ls;
-	void *img_p_lr;
-	void *img_p_ll;
 	void *img_ps_rs;
+	void *img_pe_rs;
 	void *img_p_rs;
-	void *img_p_rr;
-	void *img_p_rl;
 }	t_sl_tiles;
-
-typedef struct s_sl_layers
-{
-	void	*background;
-	void	*elements;
-	void	*player;
-	int		width;
-	int		height;
-}	t_sl_layers;
 
 void	path_init_ext(char **path_array);
 void	path_init(char **path_array);
@@ -122,22 +90,18 @@ void	wall_lr_punch(t_sl_hub *data, int y, int x);
 # define PATH_XC "images/img_xc.xpm"
 # define PATH_XO "images/img_xo.xpm"
 # define PATH_PS_BS "images/img_ps_bs.xpm"
+# define PATH_PE_BS "images/img_pe_bs.xpm"
 # define PATH_P_BS "images/img_p_bs.xpm"
-# define PATH_P_BR "images/img_p_br.xpm"
-# define PATH_P_BL "images/img_p_bl.xpm"
 # define PATH_PS_FS "images/img_ps_fs.xpm"
+# define PATH_PE_FS "images/img_pe_fs.xpm"
 # define PATH_P_FS "images/img_p_fs.xpm"
-# define PATH_P_FR "images/img_p_fr.xpm"
-# define PATH_P_FL "images/img_p_fl.xpm"
 # define PATH_PS_LS "images/img_ps_ls.xpm"
+# define PATH_PE_LS "images/img_pe_ls.xpm"
 # define PATH_P_LS "images/img_p_ls.xpm"
-# define PATH_P_LR "images/img_p_lr.xpm"
-# define PATH_P_LL "images/img_p_ll.xpm"
 # define PATH_PS_RS "images/img_ps_rs.xpm"
+# define PATH_PE_RS "images/img_pe_rs.xpm"
 # define PATH_P_RS "images/img_p_rs.xpm"
-# define PATH_P_RR "images/img_p_rr.xpm"
-# define PATH_P_RL "images/img_p_rl.xpm"
-# define PATH_COUNT 31
+# define PATH_COUNT 27
 
 # define CTLFUNC_COUNT 3
 

@@ -6,12 +6,12 @@
 #    By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/07 18:56:34 by npentini          #+#    #+#              #
-#    Updated: 2024/07/25 01:06:44 by npentini         ###   ########.fr        #
+#    Updated: 2024/07/26 03:18:04 by npentini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-SRCS = so_long.c utils/so_long_misc.c utils/so_long_print.c utils/so_long_free.c errors/so_long_error.c errors/so_long_error_func1.c errors/so_long_error_func2.c so_long_render_punch1.c so_long_render_punch2.c so_long_win_img_setup.c so_long_render.c
+SRCS = so_long.c utils/so_long_misc.c utils/so_long_print.c utils/so_long_free.c errors/so_long_error.c errors/so_long_error_func1.c errors/so_long_error_func2.c render/so_long_render_punch1.c render/so_long_render_punch2.c render/so_long_win_img_setup.c render/so_long_render.c
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_TIMESTAMP = $(LIBFT_PATH)/.libf_timestamp

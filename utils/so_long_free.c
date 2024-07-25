@@ -6,11 +6,39 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:05:36 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/25 01:52:59 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:36:22 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	free_img(void *mlx, void **img)
+{
+	if (img != NULL && *img != NULL)
+	{
+		mlx_destroy_image(mlx, *img);
+		*img = NULL;
+	}
+}
+
+void	free_win(void *mlx, void **win)
+{
+	if (win != NULL && *win != NULL)
+	{
+		mlx_destroy_window(mlx, *win);
+		*win = NULL;
+	}
+}
+
+void	free_mlx(void **mlx)
+{
+	if (mlx != NULL && *mlx != NULL)
+	{
+		mlx_destroy_display(*mlx);
+		free(*mlx);
+		*mlx = NULL;
+	}
+}
 
 void	free_str(char **str)
 {
@@ -82,9 +110,9 @@ int	free_data(t_sl_hub **data, int which_to_free, int x)
 		else if (which_to_free == 2 && *data != NULL && (*data)->mlx != NULL)
 		{
 			destroy_img(&(*data)->tiles->img_g, (*data)->mlx->mlx, -1, PATH_COUNT);
-			mlx_destroy_window((*data)->mlx->mlx, (*data)->mlx->win);
-			mlx_destroy_display((*data)->mlx->mlx);
-			free_str((char **)&(*data)->mlx->mlx);
+			free_img((*data)->mlx->mlx, &(*data)->mlx->img_sample);
+			free_win((*data)->mlx->mlx, &(*data)->mlx->win);
+			free_mlx(&(*data)->mlx->mlx);
 			free_struct((void **)&(*data)->tiles);
 			free_struct((void **)&(*data)->mlx);
 		}
