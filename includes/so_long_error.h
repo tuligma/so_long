@@ -6,7 +6,7 @@
 /*   By: npentini <npentini@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:47:04 by npentini          #+#    #+#             */
-/*   Updated: 2024/07/20 21:42:48 by npentini         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:21:38 by npentini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,14 @@ typedef struct s_sl_vmap
 
 # include "mycolors.h"
 
-int	error_print_free(int error_code, char *error_message);
-int	error_printer(int error_code, t_sl_hub *data, char **map, char *map_str);
-// print array func 
+int		error_print_free(int error_code, char *error_message);
 void	print_struct(t_sl_err *error);
 void	print_map_array(char **map_array);
-void	print_map_array_colored(char **map, int line_count, int line_len);
 
 
 int		map_error_checker(t_sl_hub *data);
-char	*line_extraction(int fd, t_sl_hub *data,
-			char *map_str, char *(*f)(int));
 void	error_func_init(int (**error_function)(t_sl_hub*));
-int		map_extraction(t_sl_hub *data, char *file);
-t_sl_hub	*init_handler(int argc, char *argv[]);
+
 
 // error function pointers
 int		error_argument(int argc, char *argv[]);
